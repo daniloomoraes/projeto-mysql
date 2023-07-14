@@ -6,6 +6,9 @@ const cors = require('cors');
 const PORT = process.env.PORT || 3001;
 
 app.use(cors());
+app.use(express.json()); // Parse JSON request bodies
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded request bodies
+
 app.use('/api/teste', testeRoutes);
 
 app.listen(PORT, () => {
