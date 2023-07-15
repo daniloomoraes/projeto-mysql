@@ -52,5 +52,25 @@ router.post('/add', (req, res) => {
   });
 });
 
+// DELETE route to delete a specific item by ID
+router.delete('/item/delete/:id', (req, res) => {
+  const itemId = req.params.id;
+  const query = 'DELETE FROM teste WHERE id = ?';
+
+  db.query(query, [itemId], (error) => {
+    if (error) {
+      handleDatabaseError(error, res);
+    } else {
+      // Fetch all items after deleting the item
+      db.query('SELECT * FROM teste', (fetchError, results) => {
+        if (fetchError) {
+          handleDatabaseError(fetchError, res);
+        } else {
+          res.json(results);
+        }
+      });
+    }
+  });
+});
 
 module.exports = router;

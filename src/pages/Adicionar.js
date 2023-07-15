@@ -5,6 +5,7 @@ import axios from "axios";
 const Adicionar = () => {
 
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     nome: '',
     valor: ''
