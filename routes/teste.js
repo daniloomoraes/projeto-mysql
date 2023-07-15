@@ -73,4 +73,26 @@ router.delete('/item/delete/:id', (req, res) => {
   });
 });
 
+// PUT route to edit a specific item by ID
+router.put('/item/edit/:id', (req, res) => {
+  const itemId = req.params.id;
+  const { nome, valor } = req.body;
+  const query = 'UPDATE teste SET nome = ?, valor = ? WHERE id = ?';
+
+  db.query(query, [nome, valor, itemId], (error) => {
+    if (error) {
+      handleDatabaseError(error, res);
+    } else {
+      // Fetch all items after editing the item
+      db.query('SELECT * FROM teste', (fetchError, results) => {
+        if (fetchError) {
+          handleDatabaseError(fetchError, res);
+        } else {
+          res.json(results);
+        }
+      });
+    }
+  });
+});
+
 module.exports = router;
