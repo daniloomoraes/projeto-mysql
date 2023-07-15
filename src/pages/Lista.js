@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from "axios";
 
 const Lista = () => {
@@ -20,7 +21,13 @@ const Lista = () => {
       <h1>Lista</h1>
       <div>
         {data.map(item => (
-          <div key={item.id}>{item.nome}</div>
+          <div key={item.id}>
+            {item.nome} | <Link to={{ pathname: '/editar', search: `?id=${item.id}` }}>
+              Edit
+            </Link> | <Link to={{ pathname: '/deletar', search: `?id=${item.id}` }}>
+              Delete
+            </Link>
+          </div>
         ))}
       </div>
     </>
