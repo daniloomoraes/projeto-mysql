@@ -1,7 +1,8 @@
 // Unsupported modules removed
 const express = require('express');
 const app = express();
-const testeRoutes = require('./routes/teste');
+const testeListRoutes = require('./routes/testeList');
+const testeAddRoutes = require('./routes/testeAdd');
 const cors = require('cors');
 
 const PORT = process.env.PORT || 3001;
@@ -10,7 +11,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api/teste', testeRoutes);
+app.use('/api/teste', testeListRoutes);
+app.use('/api/teste/add', testeAddRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

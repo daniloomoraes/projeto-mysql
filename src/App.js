@@ -1,27 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import axios from "axios";
+// App.js or Routes.js
 
-function App() {
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
-  const [data, setData] = useState([]);
+import Lista from './pages/Lista';
+import Adicionar from './pages/Adicionar';
 
-  useEffect(() => {
-    axios.get('http://localhost:3001/api/teste')
-      .then(resp => {
-        setData(resp.data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }, []);
-
+const App = () => {
   return (
-    <div>
-      {data.map(item => (
-        <div key={item.id}>{item.nome}</div>
-      ))}
-    </div>
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Lista</Link>
+            </li>
+            <li>
+              <Link to="/Adicionar">Adicionar</Link>
+            </li>
+          </ul>
+        </nav>
+        <Routes>
+          <Route path="/" element={<Lista />} />
+          <Route path="/adicionar" element={<Adicionar />} />
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
