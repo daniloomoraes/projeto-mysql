@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../config/database');
 
 // POST route to add a new item
-router.post('/', (req, res) => {
+router.post('/add', (req, res) => {
   const { nome, valor } = req.body;
 
   const query = 'INSERT INTO teste (nome, valor) VALUES (?, ?)';

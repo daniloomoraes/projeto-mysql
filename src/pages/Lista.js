@@ -8,12 +8,12 @@ const Lista = () => {
 
   useEffect(() => {
     axios.get('http://localhost:3001/api/teste')
-      .then(resp => {
-        setData(resp.data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    .then(resp => {
+      setData(resp.data);
+    })
+    .catch(error => {
+      console.error(error);
+    });
   }, []);
 
   return (
